@@ -7,7 +7,6 @@ Designed for **WoW Classic / TBC Classic**, with a clean UI and simple configura
 
 ## ✨ Features
 
-- 🔮 Automatic Soul Shard cleanup when exceeding your configured limit  
 - 🔢 Configurable shard limit (default 20, reset value 32)  
 - 🧹 Manual cleanup button that deletes excess shards with one click  
 - 🎛️ In‑game options panel for easy configuration  
