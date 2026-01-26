@@ -80,6 +80,11 @@ heightBox:SetSize(50, 30)
 heightBox:SetPoint("LEFT", xLabel, "RIGHT", 8, 0)
 heightBox:SetAutoFocus(false)
 
+local sizeLabel3 = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+sizeLabel3:SetPoint("TOPLEFT", widthBox, "BOTTOMLEFT", 0, -10)
+sizeLabel3:SetTextColor(1, 1, 1, 1)
+sizeLabel3:SetText("ALT + Left Click to move the button")
+
 
 
 -- Save button

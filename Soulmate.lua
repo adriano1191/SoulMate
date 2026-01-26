@@ -243,6 +243,7 @@ frame:RegisterEvent("PLAYER_REGEN_ENABLED")
 frame:SetScript("OnEvent", function(self, event)
     if event == "PLAYER_LOGIN" then
         print("|cff55ff55[SM]|r SoulMate loaded. Current limit: " .. GetMaxShards())
+		print("|cff55ff55[SM]|r ALT + Left Click to move the Soul Shard button ")
 		deleteButton:SetSize(
 			SM_Config.buttonWidth or 64,
 			SM_Config.buttonHeight or 64
