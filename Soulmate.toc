@@ -1,0 +1,14 @@
+## Interface: 20505
+## Title: SoulMate
+## Notes: Automatically manages Soul Shards for Warlocks.
+## Author: Lievy
+## Version: 1.0.0
+## SavedVariables: SM_Config
+## LoadOnDemand: 0
+## X-Category: Warlock
+## X-OptionsPanel: SoulmateOptions
+## IconTexture: Interface\Icons\INV_Misc_Gem_Amethyst_02
+
+Soulmate.lua
+SoulmateOptions.lua
+
