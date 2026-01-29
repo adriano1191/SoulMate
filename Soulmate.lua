@@ -98,7 +98,9 @@ end
 function DeleteExtraShards()
 
 	if UnitAffectingCombat("player") or InCombatLockdown() then
-		print("Cannot delete now, leave combat first")
+		if SM_Config.showMissingExcess then
+			print("Cannot delete now, leave combat first")
+		end
 		return
 	end
 
@@ -124,7 +126,9 @@ function DeleteExtraShards()
     C_Container.PickupContainerItem(shard.bag, shard.slot)
 
     if not GetCursorInfo() then
-        print("|cffffaa00[SM]|r Failed to pick up Soul Shard.")
+		if SM_Config.showMissingExcess then
+			print("|cffffaa00[SM]|r Failed to pick up Soul Shard.")
+		end
         return
     end
 

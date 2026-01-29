@@ -69,7 +69,7 @@ checkbox1.Text:SetText("Show chat messages about removed excess soul shards")
 
 local checkbox2 = CreateFrame("CheckButton", nil, panel, "ChatConfigCheckButtonTemplate")
 checkbox2:SetPoint("TOPLEFT", checkbox1, "BOTTOMLEFT", 0, -20)
-checkbox2.Text:SetText("Show chat messages about missing excess soul shards")
+checkbox2.Text:SetText("Show chat error messages")
 
 checkbox1:SetChecked(SM_Config.showRemovedExcess)
 checkbox2:SetChecked(SM_Config.showMissingExcess)
