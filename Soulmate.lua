@@ -5,6 +5,16 @@ SM_Config = SM_Config or {}
 local DEFAULT_MAX_SHARDS = 20
 local SOUL_SHARD_ID = 6265 -- Soul Shard item ID in TBC
 
+if SM_Config.showRemovedExcess == nil then
+    SM_Config.showRemovedExcess = true
+end
+
+if SM_Config.showMissingExcess == nil then
+    SM_Config.showMissingExcess = false
+end
+
+
+
 -- Returns the configured maximum shard limit
 local function GetMaxShards()
     if type(SM_Config.maxShards) ~= "number" then
@@ -12,6 +22,7 @@ local function GetMaxShards()
     end
     return SM_Config.maxShards
 end
+
 
 -- Sets the maximum allowed Soul Shards
 local function SetMaxShards(value)
@@ -97,8 +108,10 @@ function DeleteExtraShards()
     local total, slots = FindAllSoulShards()
 
     if total <= maxShards then
-        print("|cff55ff55[SM]|r No excess Soul Shards.")
-        return
+		if SM_Config.showMissingExcess then
+			print("|cff55ff55[SM]|r No excess Soul Shards.")			
+		end
+		return
     end
 
     local shard = slots[1]
@@ -117,8 +130,9 @@ function DeleteExtraShards()
 
     DeleteCursorItem()
     ClearCursor()
-
-    print("|cff55ff55[SM]|r Removed 1 excess Soul Shard.")
+	if SM_Config.showRemovedExcess then
+		print("|cff55ff55[SM]|r Removed 1 excess Soul Shard.")
+	end
 end
 
 

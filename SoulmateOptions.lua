@@ -6,6 +6,9 @@ if not SM_Config.maxShards then
 SM_Config.maxShards = 20 
 end
 
+
+
+
 -- Create the main options panel
 local panel = CreateFrame("Frame")
 panel.name = "SoulMate"
@@ -30,31 +33,6 @@ editBox:SetAutoFocus(false)
 local label = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal") 
 label:SetPoint("LEFT", editBox, "RIGHT", 10, 0) 
 label:SetText("Soul Shard Limit")
-
---[[
--- Slider for shard limit (1–32)
-local slider = CreateFrame("Slider", "SoulMateSlider", panel, "UISliderTemplateWithLabels")
-slider:SetPoint("TOPLEFT", editBox, "BOTTOMLEFT", 0, 0)
-slider:SetMinMaxValues(1, 32)
-slider:SetValueStep(1)
-slider:SetObeyStepOnDrag(true)
-slider:SetWidth(150)
-slider:SetHeight(20)
-slider:SetValue(20)
-
-
-
--- Text slider
-SoulMateSliderLow:SetText("1")
-SoulMateSliderHigh:SetText("32")
-
-
--- Aktualizacja wartości w trakcie przesuwania
-slider:SetScript("OnValueChanged", function(self, value)
-    value = math.floor(value)
-    editBox:SetText(value)          -- synchronizacja z input boxem
-end)
---]]
 
 -- Label
 local sizeLabel = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal")
@@ -85,14 +63,29 @@ sizeLabel3:SetPoint("TOPLEFT", widthBox, "BOTTOMLEFT", 0, -10)
 sizeLabel3:SetTextColor(1, 1, 1, 1)
 sizeLabel3:SetText("ALT + Left Click to move the button")
 
+local checkbox1 = CreateFrame("CheckButton", nil, panel, "ChatConfigCheckButtonTemplate")
+checkbox1:SetPoint("TOPLEFT", sizeLabel3, "BOTTOMLEFT", 0, -20)
+checkbox1.Text:SetText("Show chat messages about removed excess soul shards")
+
+local checkbox2 = CreateFrame("CheckButton", nil, panel, "ChatConfigCheckButtonTemplate")
+checkbox2:SetPoint("TOPLEFT", checkbox1, "BOTTOMLEFT", 0, -20)
+checkbox2.Text:SetText("Show chat messages about missing excess soul shards")
+
+checkbox1:SetChecked(SM_Config.showRemovedExcess)
+checkbox2:SetChecked(SM_Config.showMissingExcess)
+
 
 
 -- Save button
 local saveButton = CreateFrame("Button", nil, panel, "UIPanelButtonTemplate")
 saveButton:SetSize(100, 25)
-saveButton:SetPoint("TOPLEFT", widthBox, "BOTTOMLEFT", 0, -40)
+saveButton:SetPoint("TOPLEFT", checkbox2, "BOTTOMLEFT", 0, -40)
 saveButton:SetText("Save")
 saveButton:SetScript("OnClick", function()
+	
+	SM_Config.showRemovedExcess = checkbox1:GetChecked()
+	SM_Config.showMissingExcess = checkbox2:GetChecked()
+
     -- Max shards
     local value = tonumber(editBox:GetText())
     if value then
@@ -122,6 +115,7 @@ saveButton:SetScript("OnClick", function()
     else
         print("|cffff5555[SM]|r Invalid button size.")
     end
+	
 end)
 
 
@@ -130,6 +124,10 @@ panel:SetScript("OnShow", function()
     if not SM_Config.maxShards then
         SM_Config.maxShards = 20
     end
+	
+	checkbox1:SetChecked(SM_Config.showRemovedExcess) 
+	checkbox2:SetChecked(SM_Config.showMissingExcess)
+	
     editBox:SetText(SM_Config.maxShards)
 	widthBox:SetText(SM_Config.buttonWidth or 64) 
 	heightBox:SetText(SM_Config.buttonHeight or 64)
